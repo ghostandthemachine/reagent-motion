@@ -1,6 +1,11 @@
 (ns motion.util)
 
 
+(defn- now
+  []
+  (str "t" (.now js/Date)))
+
+
 (defn index-of
   [coll value]
   (some (fn [[idx item]]

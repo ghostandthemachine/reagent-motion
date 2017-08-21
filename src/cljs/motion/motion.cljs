@@ -75,6 +75,18 @@
         styles))))
 
 
+(defn- transition-motion-comp
+  [component child args]
+  (let [{:keys [children]} (js->clj args :keywordize-keys true)
+        [styles] children]
+    (into
+      component
+      (map
+        (fn [& args]
+          (apply vector child args))
+        styles))))
+
+
 ;;;; Cljs API ;;;;
 
 
@@ -110,18 +122,24 @@
 
 (defn transition-motion
   [props component]
-  (let [parent   (->> component butlast (into []))
+
+  (let [component (if (= (count component) 2)
+                    [(first component) nil (last component)]
+                    component)
+        parent   (->> component butlast (into []))
         child-fn (last component)
         props    (-> props
                    (update :default-styles clj->js)
-                   (update :styles (fn [f]
-                                     (fn [& args]
-                                       (apply (comp clj->js f ->clj) args)))))]
+                   (update :styles clj->js)
+                   (update :will-leave (fn [f]
+                                         (fn [& args]
+                                           (apply (comp clj->js f ->clj) args)))))]
+
     (assert (fn? child-fn))
     [-transition-motion
      props
      (fn [interpolating-styles]
        (reagent/create-element
-         (reagent/reactify-component (partial staggered-motion-comp parent child-fn))
+         (reagent/reactify-component (partial transition-motion-comp parent child-fn))
          #js {}
          [interpolating-styles]))]))
