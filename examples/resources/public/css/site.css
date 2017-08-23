@@ -1,0 +1,117 @@
+/* body { */
+/*     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+/*     line-height: 1.4em; */
+/*     background: #f5f5f5; */
+/*     color: #4d4d4d; */
+/*     min-width: 230px; */
+/*     max-width: 550px; */
+/*     margin: 0 auto; */
+/*     -webkit-font-smoothing: antialiased; */
+/*     -moz-font-smoothing: antialiased; */
+/*     font-smoothing: antialiased; */
+/*     font-weight: 300; */
+/* } */
+
+.demo5 {
+    background-color: #1B1B1B;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.demo5-ball {
+    width: 50px;
+    height: 50px;
+    border-radius: 99px;
+    position: absolute;
+    border: 1px solid lightblue;
+}
+
+
+
+.demo6-outer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+}
+
+.demo6 {
+    width: 900px;
+    height: 600px;
+    position: relative;
+}
+
+.demo6-cell {
+    position: absolute;
+    border: 1px solid #E4E4E4;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    -webkit-align-content: flex-start;
+    -webkit-justify-content: center;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+.demo6-cell input {
+    visibility: hidden;
+    cursor: ew-resize;
+}
+
+.demo6-cell:hover input {
+    visibility: visible;
+}
+
+.demo6-ball {
+    width: 50px;
+    height: 50px;
+    border-radius: 99px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: -webkit-flex;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    -webkit-flex-direction: column;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    font-size: 12px;
+    background-color: #FDC3C3;
+    z-index: 1;
+}
+
+.demo6-ball-active {
+    background-color: #FF8585;
+}
+
+.demo6-minus {
+    padding-left: 4px;
+    color: #CC2E2E;
+}
+
+.demo6-plus {
+    padding-left: 4px;
+    color: #39A11E;
+}
+
+.demo6-preset {
+    display: flex;
+    justify-content: space-around;
+    display: -webkit-flex;
+    -webkit-justify-content: space-around;
+    padding: 0 2px 0 2px;
+}
