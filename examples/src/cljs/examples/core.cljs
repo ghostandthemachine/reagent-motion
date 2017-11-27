@@ -14,7 +14,8 @@
 
 (defn- example-link
   [page-name url]
-  [:div [:a {:href url} page-name]])
+  [:div
+   [:a {:href url} page-name]])
 
 ;; -------------------------
 ;; Views
@@ -73,12 +74,14 @@
   (reagent/render [current-page] (.getElementById js/document "app")))
 
 (defn ^:export init []
+  (println "init app")
   (accountant/configure-navigation!
     {:nav-handler
      (fn [path]
        (secretary/dispatch! path))
      :path-exists?
      (fn [path]
+       (println path (secretary/locate-route path))
        (secretary/locate-route path))})
   (accountant/dispatch-current!)
   (mount-root))

@@ -31,6 +31,18 @@
    (-spring v (clj->js m))))
 
 
+;; (def -spring
+;;   (comp #(js->clj % :keywordize-keys true)
+;;         (goog.object/getValueByKeys js/ReactMotion "spring")))
+
+
+;; (defn spring
+;;   ([v]
+;;    (-spring v))
+;;   ([v m]
+;;    (-spring v (clj->js m))))
+
+
 (def -presets
   (goog.object/getValueByKeys js/ReactMotion "presets"))
 
@@ -122,7 +134,6 @@
 
 (defn transition-motion
   [props component]
-
   (let [component (if (= (count component) 2)
                     [(first component) nil (last component)]
                     component)
@@ -131,6 +142,9 @@
         props    (-> props
                    (update :default-styles clj->js)
                    (update :styles clj->js)
+                   (update :will-enter (fn [f]
+                                         (fn [& args]
+                                           (apply (comp clj->js f ->clj) args))))
                    (update :will-leave (fn [f]
                                          (fn [& args]
                                            (apply (comp clj->js f ->clj) args)))))]
